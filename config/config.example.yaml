@@ -1,0 +1,110 @@
+# Configuración del Sistema de Monitoreo Municipal
+
+# Bases de datos
+databases:
+  # Base de datos 1: Sistema de gestión de solicitudes
+  db1:
+    type: postgresql
+    host: localhost
+    port: 5432
+    database: solicitudes_db
+    username: ${DB1_USER}
+    password: ${DB1_PASSWORD}
+    schema: public
+    
+  # Base de datos 2: Sistema de atención ciudadana
+  db2:
+    type: mysql
+    host: localhost
+    port: 3306
+    database: atencion_db
+    username: ${DB2_USER}
+    password: ${DB2_PASSWORD}
+    
+  # Base de datos 3: Sistema de seguimiento
+  db3:
+    type: sqlserver
+    host: localhost
+    port: 1433
+    database: seguimiento_db
+    username: ${DB3_USER}
+    password: ${DB3_PASSWORD}
+
+# Configuración de ETL
+etl:
+  # Directorio de datos crudos
+  raw_data_dir: data/raw
+  
+  # Directorio de datos procesados
+  processed_data_dir: data/processed
+  
+  # Frecuencia de extracción (en horas)
+  extraction_frequency: 24
+  
+  # Ventana de datos históricos (en días)
+  historical_window: 365
+
+# Configuración de KPIs
+kpis:
+  # Umbral de tiempo de atención (en horas)
+  tiempo_atencion_umbral: 48
+  
+  # Meta de tasa de resolución (%)
+  tasa_resolucion_meta: 85
+  
+  # Categorías de solicitudes
+  categorias:
+    - Servicios Públicos
+    - Infraestructura
+    - Seguridad
+    - Salud
+    - Educación
+    - Medio Ambiente
+    - Otros
+
+# Configuración del modelo predictivo
+model:
+  # Tipo de modelo
+  algorithm: ensemble
+  
+  # Ventana temporal para entrenamiento (días)
+  training_window: 180
+  
+  # Horizonte de predicción (días)
+  prediction_horizon: 30
+  
+  # Parámetros del modelo
+  parameters:
+    n_estimators: 100
+    max_depth: 10
+    learning_rate: 0.1
+    random_state: 42
+  
+  # Directorio para modelos guardados
+  models_dir: models/saved
+  
+  # Métricas de evaluación
+  evaluation_metrics:
+    - rmse
+    - mae
+    - r2
+
+# Configuración de reportes
+reports:
+  # Directorio de reportes
+  output_dir: reports/generated
+  
+  # Formato de exportación
+  export_formats:
+    - pdf
+    - excel
+    - html
+  
+  # Frecuencia de generación
+  generation_frequency: weekly
+
+# Configuración de logs
+logging:
+  level: INFO
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  file: logs/smm.log
