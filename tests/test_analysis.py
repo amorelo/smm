@@ -47,6 +47,7 @@ def test_kpi_tiempo_promedio_atencion(sample_data, tmp_path):
     # Crear calculadora con configuración mínima
     calculator = KPICalculator.__new__(KPICalculator)
     calculator.data = sample_data
+    calculator.kpi_config = {'tiempo_atencion_umbral': 48}
     
     kpi = calculator.calculate_tiempo_promedio_atencion()
     
